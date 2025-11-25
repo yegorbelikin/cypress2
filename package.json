@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx cypress run --record --key 6d7f0482-e41d-4831-a080-fef72b8b8253"
   },
   "author": "Yegor belikin",
   "license": "ISC",

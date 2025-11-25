@@ -18,7 +18,7 @@ it("Should unsuccessfully login", () => {
   cy.contains("Ошибка авторизации!").should("be.visible");
 });
 
-it.only("Selecting a movie from the admin panel", () => {
+it("Selecting a movie from the admin panel", () => {
   cy.visit("/admin");
   cy.login(`${login.validEmail}`, `${login.validPass}`);
   cy.get(".conf-step__movie-title")
