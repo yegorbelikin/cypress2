@@ -1,4 +1,5 @@
 const login = require("../fixtures/login.json");
+const hall = require("../fixtures/hall.json");
 
 it("should open main page", () => {
   cy.visit("/admin");
@@ -20,15 +21,20 @@ it("Should unsuccessfully login", () => {
 it.only("Selecting a movie from the admin panel", () => {
   cy.visit("/admin");
   cy.login(`${login.validEmail}`, `${login.validPass}`);
-  cy.get("div:nth-child(2) > div:nth-child(4) > h3:nth-child(2)")
+  cy.get(".conf-step__movie-title")
+    .eq(`${hall.movie}`)
     .invoke("text")
     .then((nameOfTheMovie) => {
       cy.visit("/client");
-      cy.get("a:nth-child(4)").click();
+      cy.get(`a:nth-child(${hall.day})`).click();
       cy.get(".movie__info")
         .contains(nameOfTheMovie)
-        .then(($el) => {
-          cy.log($el);
-        });
+        .parents(".movie")
+        .find(".movie-seances__time")
+        .first()
+        .click();
     });
+  cy.get(`div:nth-child(${hall.row}) span:nth-child(${hall.seat})`).click();
+  cy.contains("Забронировать").click();
+  cy.contains("Вы выбрали билеты").should("be.visible");
 });
